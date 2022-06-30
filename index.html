@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+        <script src="https://unpkg.com/vue@3"></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/esti.css">
+    <script class="cssdeck" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    
+    <title>api facebook</title>
+
+    <style>
+        body {
+            font-family: 'Oxygen', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="h-screen bg-gray-100">
+    <div id="app">
+        <div class="favorites">
+            
+        <div class="favorite" v-for="alias in todosfavoritos" :key="alias.id">
+            <a @click.prevent="mostrarFavorito(alias)" href="">
+                <img v-bind:src="alias.picture.data.url" class="favorite__avatar">
+            </a>
+        </div>
+        
+        </div>
+    <section class="md:h-full  text-gray-600" >
+        <div class="container px-5 py-24 mx-auto  flex items-center">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-6xl text-gray-700 font-semibold">Api facebook</h1>
+                <br>
+                <br>
+                <form class="search" v-on:submit.prevent="Buscar">
+                
+                        <input id="busca" v-model="busqueda" type="text" class="search__input" placeholder="Buscar" required>
+                        <br>
+                        <br>
+                        <input type="submit" class="search__submit" value="Buscar"> 
+                </form>
+            </div>
+            <div class="result" v-if="result">
+           <div class="flex flex-wrap -m-4 ">
+                <div class="p-1 sm:w-1/3 lg:w-1/3" class="row cards"  style="width: 200; margin: 500;">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <!--<a v-if="estafavoritos" class="result__toggle-favorite"  href=""@click.prevent="RemoverFavorito">Remover Favorito<img src="imagenes/Estrella_amarilla.png" alt="" width="30" height="30"></a>-->
+                        <div align="center">
+                            <img class="lg:h-72 md:h-50 w-50 "
+                            v-bind:src="result.picture.data.url" alt="">
+                        </div>
+                        <div class="p-6 hover:bg-indigo-700 hover:text-white transition duration-300 ease-in">
+                            <h2 class="text-base font-medium text-indigo-300 mb-1">{{result.birthday}}</h2>
+                            <h1 class="text-2x font-semibold mb-3"  class="result__name">{{result.name}}</h1>
+                            <p class="text-2x font-semibold mb-3">este es el perfil que ha deseado buscar por medio de la api de facebook 
+                                desea añadir este perfil o removerlo en el caso de que no lo tenga añadido:</p>
+                                <a v-if="estafavoritos" class="result__toggle-favorite"  href=""@click.prevent="RemoverFavorito">Remover Favorito<img src="imagenes/Estrella_amarilla.png" alt="" width="30" height="30"></a>
+                                <a v-else class="result__toggle-favorite"  href=""v-on:click.prevent="addFavorito">añadir a favoritos<img src="imagenes/Estrella_amarilla.png" class="result__estrella" alt="" width="30" height="30"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="main.js"></script>
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+    
+</body>
+
+</html>
